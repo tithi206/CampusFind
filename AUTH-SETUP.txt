@@ -1,0 +1,21 @@
+CampusFind: real Sign Up / Sign In setup
+
+The UI and Supabase Auth integration are included, but authentication will not work until you connect your own Supabase project.
+
+1. Go to https://supabase.com/ and create a project.
+2. In your project dashboard, open Project Settings -> API (or the API Keys section).
+3. Copy the Project URL and the anon/public key. Never use the service_role/secret key in browser code.
+4. Open app.js and find these two lines near the top:
+   const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+   const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_PUBLIC_KEY";
+5. Replace the placeholder text with your Project URL and anon/public key. Keep the quotes.
+6. In Supabase Authentication -> URL Configuration, add your local website URL to the allowed redirect/site URLs if needed. For Live Server this is usually http://127.0.0.1:5500 or http://localhost:5500; use the exact URL shown by your browser.
+7. In Authentication -> Providers -> Email, choose whether email confirmation is required. If it is enabled, new users must click the confirmation link before signing in.
+8. Save app.js and reload the website using Live Server.
+
+The sign-up form creates an account with email, password, and full name metadata. The sign-in form verifies the account with Supabase. A sign-out option appears in the header after login.
+
+Important limitations:
+- Do not publish or share a service_role key. Only the anon/public key belongs in this frontend.
+- Authentication is real after configuration, but lost/found posts, chat, claims, and notifications in this prototype still use browser-local demo storage. They are not yet shared securely between users. A database, Row Level Security policies, and backend rules are needed for that.
+- Existing visual design and other feature UI are preserved.
